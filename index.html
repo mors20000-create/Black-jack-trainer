@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#07110d">
+  <title>Blackjack Trainer 1.3 — Cut Card אופציונלי</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="title">♠ Blackjack Trainer</div>
+    <div class="stats">
+      <div class="stat">בנק<b id="bank">400 ₪</b></div>
+      <div class="stat">סיבובים<b id="rounds">0</b></div>
+      <div class="stat">ניצחונות<b id="wins">0</b></div>
+      <div class="stat">הפסדים<b id="losses">0</b></div>
+      <div class="stat">דיוק<b id="accuracy">100%</b></div>
+      <div class="stat">בנעל<b id="remaining">260</b></div>
+    </div>
+  </div>
+
+  <div class="table">
+    <section class="zone"><h2>הדילר <span id="dealerTotal" class="muted"></span></h2><div id="dealerCards" class="cards"></div></section>
+    <section class="zone"><h2>הידיים שלך</h2><div id="playerHands"></div></section>
+  </div>
+
+  <div class="panel">
+    <div id="message" class="message">לחצי על “חלוקה חדשה” כדי להתחיל.</div>
+    <div class="row"><label>הצג המלצה</label><input type="checkbox" id="showHint"></div>
+    <div class="row"><label>הצג סיכויי ניצחון</label><input type="checkbox" id="showOdds"></div>
+    <div class="row"><label>הפעל ספירת קלפים Hi-Lo</label><input type="checkbox" id="showCount"></div>
+    <div class="row"><label>בטל Cut Card — ערבוב רק כשהנעל נגמרת</label><input type="checkbox" id="disableCutCard"></div>
+    <div id="countBox" class="count-box hidden" aria-label="ספירת קלפים Hi-Lo">
+      <div class="count-title">🧠 ספירת קלפים — Hi-Lo</div>
+      <div class="count-grid">
+        <div class="count-cell">Running Count<b id="runningCount">0</b></div>
+        <div class="count-cell">True Count<b id="trueCount">0.0</b></div>
+        <div class="count-cell">חפיסות שנותרו<b id="decksRemaining">5.0</b></div>
+      </div>
+      <div class="count-note">2–6 = ‎+1 · 7–9 = 0 · 10–A = ‎−1. הספירה מתאפסת בכל ערבוב.</div>
+    </div>
+    <div id="oddsBox" class="odds-box"><div class="odds-title" id="oddsTitle">סיכויים לפי היד המוצגת</div><div class="odds-grid"><div class="odds-cell">ניצחון<b id="oddsWin">—</b></div><div class="odds-cell">תיקו<b id="oddsPush">—</b></div><div class="odds-cell">הפסד<b id="oddsLoss">—</b></div></div><div class="odds-note" id="oddsNote">החישוב אינו מתחשב בקלפים שיצאו מהנעל.</div></div>
+    <div class="row"><label>הימור</label><select id="bet"><option>10</option><option selected>25</option><option>50</option><option>100</option></select></div>
+    <div class="row"><label>חפיסות</label><select id="decks"><option>1</option><option selected>5</option><option>6</option><option>8</option></select></div>
+    <div class="smallbuttons"><button id="saveBtn">שמור</button><button id="loadBtn">טען</button><button id="resetBtn">איפוס</button></div>
+    <div class="history"><h3>היסטוריה</h3><div id="history"></div></div>
+  </div>
+</div>
+
+<div class="actions">
+  <button id="newBtn" class="primary">חלוקה חדשה</button>
+  <button id="hitBtn">Hit</button>
+  <button id="standBtn">Stand</button>
+  <button id="doubleBtn">Double</button>
+  <button id="splitBtn">Split</button>
+  <button id="surrenderBtn" class="danger">Surrender</button>
+  <button id="insuranceBtn" class="insurance">Insurance</button>
+  <button id="noInsuranceBtn">ללא Insurance</button>
+</div>
+
+
+<div id="shuffleOverlay" class="shuffle-overlay" role="status" aria-live="assertive" aria-hidden="true">
+  <div class="shuffle-box">
+    <div class="shuffle-icon">🔄</div>
+    <div class="shuffle-title">החפיסות עורבבו</div>
+    <div class="shuffle-subtitle">נעל חדשה הוכנה – המשחק ממשיך</div>
+  </div>
+</div>
+  <script src="app.js"></script>
+</body>
+</html>
