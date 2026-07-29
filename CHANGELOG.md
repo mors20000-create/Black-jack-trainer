@@ -1,3 +1,10 @@
+# 1.5.8 — Simplified Statistics
+
+- הוסרו Blackjacks ו-Busts משורת הסטטיסטיקות העליונה.
+- נשארו רק Bank, Profit/Loss, Hands, Wins, Losses ו-Pushes.
+- הסטטיסטיקות הפנימיות של Blackjacks ו-Busts נשמרו במנוע לצורכי תאימות, אך אינן מוצגות למשתמש.
+- לא בוצעו שינויים בחוקי המשחק או במצב Trainer.
+
 # 1.5.7 — Horizontal Statistics
 
 - הועברו Bank, Profit/Loss, Hands, Wins, Losses, Pushes, Blackjacks ו-Busts לשורה מאוזנת בחלק העליון.

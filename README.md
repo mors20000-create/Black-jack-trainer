@@ -121,7 +121,7 @@ The recommendation is displayed beside the active player hand total instead of i
 
 ## גרסה 1.5.7 — סטטיסטיקות אנכיות
 
-התצוגה כוללת בנק, רווח/הפסד, ידיים, ניצחונות, הפסדים, תיקו, Blackjacks ו-Busts. אין Win Rate ואין חלוקה לקבוצות.
+התצוגה כוללת בנק, רווח/הפסד, ידיים, ניצחונות, הפסדים ותיקו. אין Win Rate, Blackjacks או Busts בתצוגה.
 
 
 ## גרסה 1.5.7
