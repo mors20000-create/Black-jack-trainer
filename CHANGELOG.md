@@ -1,3 +1,9 @@
+# 1.5.8.1 — Game Entry Fixed
+
+- תוקנה תקלה שמנעה כניסה ל-Game Start לאחר הסרת Blackjacks ו-Busts מהתצוגה.
+- נוספה הגנה מפני רכיבי סטטיסטיקה חסרים.
+- נוספה גרסת cache-busting לקובצי CSS ו-JavaScript כדי ש-GitHub Pages ואייפון יטענו את הקוד החדש.
+
 # 1.5.8 — Simplified Statistics
 
 - הוסרו Blackjacks ו-Busts משורת הסטטיסטיקות העליונה.
