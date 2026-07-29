@@ -5,20 +5,62 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#07110d">
-  <title>Blackjack Trainer 1.3 — Cut Card אופציונלי</title>
+  <title>Blackjack Trainer 1.5.7 — Horizontal Statistics</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="modeLauncher" class="mode-launcher">
+  <div class="mode-launcher-box">
+    <div class="mode-logo">♠ Blackjack Trainer</div>
+    <div class="mode-subtitle">בחר מצב לפני הכניסה לשולחן</div>
+    <div class="mode-options">
+      <button id="gameModeBtn" class="mode-card mode-game" type="button">
+        <span class="mode-icon">🎮</span>
+        <strong>Game Start</strong>
+        <small>משחק רגיל עם חלוקה אקראית</small>
+      </button>
+      <button id="trainerModeBtn" class="mode-card mode-trainer" type="button">
+        <span class="mode-icon">🎓</span>
+        <strong>Trainer</strong>
+        <small>משחק רגיל עם מסנן ידיים</small>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="trainerSetup" class="trainer-setup hidden">
+  <div class="trainer-setup-box">
+    <h1>🎓 מסנן ידיים</h1>
+    <p>כל סיבוב יהיה משחק מלא. המסנן משפיע רק על החלוקה הראשונה.</p>
+    <div class="trainer-filter-grid">
+      <label><input type="checkbox" value="double" class="trainer-filter"> Double</label>
+      <label><input type="checkbox" value="split" class="trainer-filter"> Split</label>
+      <label><input type="checkbox" value="surrender" class="trainer-filter"> Surrender</label>
+      <label><input type="checkbox" value="soft" class="trainer-filter"> Soft Hands</label>
+      <label><input type="checkbox" value="hard" class="trainer-filter"> Hard Hands</label>
+      <label><input type="checkbox" value="mixed" id="mixedFilter"> Mixed — הכול</label>
+    </div>
+    <div id="trainerSetupError" class="trainer-setup-error" aria-live="polite"></div>
+    <div class="trainer-setup-actions">
+      <button id="backToModeBtn" type="button">חזרה</button>
+      <button id="startTrainerBtn" class="primary" type="button">התחל אימון</button>
+    </div>
+  </div>
+</div>
+
+<div id="gameShell" class="game-shell hidden">
 <div class="app">
   <div class="top">
     <div class="title">♠ Blackjack Trainer</div>
-    <div class="stats">
-      <div class="stat">בנק<b id="bank">400 ₪</b></div>
-      <div class="stat">סיבובים<b id="rounds">0</b></div>
-      <div class="stat">ניצחונות<b id="wins">0</b></div>
-      <div class="stat">הפסדים<b id="losses">0</b></div>
-      <div class="stat">דיוק<b id="accuracy">100%</b></div>
-      <div class="stat">בנעל<b id="remaining">260</b></div>
+    <div class="stats stats-horizontal" aria-label="סטטיסטיקות משחק">
+      <div class="stat"><span>💰 בנק</span><b id="bank">400 ₪</b></div>
+      <div class="stat"><span>📈 רווח / הפסד</span><b id="profitLoss">0 ₪</b></div>
+      <div class="stat"><span>🃏 ידיים</span><b id="handsPlayed">0</b></div>
+      <div class="stat"><span>✅ ניצחונות</span><b id="wins">0</b></div>
+      <div class="stat"><span>❌ הפסדים</span><b id="losses">0</b></div>
+      <div class="stat"><span>🤝 תיקו</span><b id="pushes">0</b></div>
+      <div class="stat"><span>🃏 Blackjacks</span><b id="blackjacks">0</b></div>
+      <div class="stat"><span>💥 Busts</span><b id="busts">0</b></div>
     </div>
   </div>
 
@@ -28,6 +70,7 @@
   </div>
 
   <div class="panel">
+    <div class="mode-status-row"><span id="modeBadge" class="mode-badge">Game</span><button id="exitModeBtn" class="exit-mode" type="button">חזרה למסך פתיחה</button></div>
     <div id="message" class="message">לחצי על “חלוקה חדשה” כדי להתחיל.</div>
     <div class="row"><label>הצג המלצה</label><input type="checkbox" id="showHint"></div>
     <div class="row"><label>הצג סיכויי ניצחון</label><input type="checkbox" id="showOdds"></div>
@@ -60,7 +103,18 @@
   <button id="insuranceBtn" class="insurance">Insurance</button>
   <button id="noInsuranceBtn">ללא Insurance</button>
 </div>
+</div>
 
+<div id="systemErrorToast" class="system-error-toast hidden" role="alert" aria-live="assertive">
+  <button id="systemErrorClose" class="system-error-close" type="button" aria-label="סגור התראת תקלה">×</button>
+  <div class="system-error-icon">⚠️</div>
+  <div class="system-error-content">
+    <strong>נמצאה תקלה במערכת</strong>
+    <span id="systemErrorSummary">בדיקות המערכת זיהו תקלה.</span>
+    <button id="systemErrorDetailsBtn" class="system-error-details-btn" type="button">הצג פרטים</button>
+    <div id="systemErrorDetails" class="system-error-details hidden"></div>
+  </div>
+</div>
 
 <div id="shuffleOverlay" class="shuffle-overlay" role="status" aria-live="assertive" aria-hidden="true">
   <div class="shuffle-box">
@@ -69,6 +123,15 @@
     <div class="shuffle-subtitle">נעל חדשה הוכנה – המשחק ממשיך</div>
   </div>
 </div>
-  <script src="app.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/shoe.js"></script>
+  <script src="js/strategy.js"></script>
+  <script src="js/odds.js"></script>
+  <script src="js/training.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/automated-tests.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

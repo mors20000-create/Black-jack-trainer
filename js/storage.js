@@ -1,0 +1,5 @@
+(function(BJ){
+'use strict';
+BJ.Game.prototype.save = function(){const data={bank:this.bank,sessionStartBank:this.sessionStartBank,stats:this.stats,hands:this.hands,dealer:this.dealer,active:this.active,roundActive:this.roundActive,insurancePending:this.insurancePending,insuranceBet:this.insuranceBet,history:this.history,shoe:this.shoe,runningCount:this.runningCount};localStorage.setItem('bjIphoneFixed',JSON.stringify(data));this.render('המשחק נשמר.')};
+BJ.Game.prototype.load = function(){const raw=localStorage.getItem('bjIphoneFixed');if(!raw){this.render('לא נמצא משחק שמור.');return}Object.assign(this,JSON.parse(raw));this.sessionStartBank=Number.isFinite(Number(this.sessionStartBank))?Number(this.sessionStartBank):400;this.stats=Object.assign({rounds:0,hands:0,wins:0,losses:0,pushes:0,blackjacks:0,busts:0,correct:0,decisions:0},this.stats||{});if(!this.stats.hands)this.stats.hands=(this.stats.wins||0)+(this.stats.losses||0)+(this.stats.pushes||0);this.render('המשחק נטען.')};
+})(window.BJ);

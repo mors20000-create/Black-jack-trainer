@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strategy Tester — Blackjack Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="tester-page">
+<main class="tester-shell">
+<header class="tester-header"><div><h1>🧪 Strategy Tester</h1><p>בדיקה אוטומטית של Hard, Soft, Pairs, Surrender וחיבור מנוע ההמלצות.</p></div><a class="tester-back" href="index.html">חזרה למשחק</a></header>
+<div id="testerSummary" class="tester-summary">מריץ בדיקות…</div>
+<section class="tester-controls">
+<label>סינון <select id="testerFilter"><option value="all">הכול</option><option value="hard">Hard</option><option value="soft">Soft</option><option value="pairs">Pairs</option><option value="surrender-hard">Surrender Hard</option><option value="surrender-pairs">Surrender Pairs</option><option value="integration">Integration</option><option value="fallback">Fallback</option></select></label>
+<label>חיפוש <input id="testerSearch" placeholder="למשל A,5 או 10"></label>
+<button id="runTests" class="primary">הרץ שוב</button>
+</section>
+<div id="testerCount" class="tester-count"></div>
+<div class="tester-table-wrap"><table class="tester-table"><thead><tr><th>מצב</th><th>תחום</th><th>יד</th><th>דילר</th><th>צפוי</th><th>בפועל</th><th>פרטים</th></tr></thead><tbody id="testerBody"></tbody></table></div>
+</main>
+<script src="js/core.js"></script><script src="js/shoe.js"></script><script src="js/strategy.js"></script><script src="js/odds.js"></script><script src="js/engine.js"></script><script src="js/automated-tests.js"></script><script src="js/strategy-tester.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{BJ.StrategyTester.render();document.getElementById('runTests').onclick=()=>BJ.StrategyTester.render();document.getElementById('testerFilter').onchange=()=>BJ.StrategyTester.render();document.getElementById('testerSearch').oninput=()=>BJ.StrategyTester.render();});</script>
+</body></html>
